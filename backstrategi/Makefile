@@ -1,5 +1,5 @@
 DOCKER_COMPOSE_DEV := docker-compose -f docker-compose.yml
-DJANGO := docker-composo exec api python3 manage.py
+DJANGO := docker-compose exec api python3 manage.py
 
 build:
 	@${DOCKER_COMPOSE_DEV} build
