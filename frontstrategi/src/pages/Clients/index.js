@@ -63,19 +63,21 @@ export default function Clients() {
                 <th>Nome</th>
                 <th>Gênero</th>
                 <th>Cliente desde</th>
+                <th>Ação</th>
               </tr>
             </thead>
+            <tbody>
             {clients.map((client, index) => (
-              <tbody key={index}>
-                <tr>
-                  <td>{index}</td>
-                  <td>{client.name}</td>
-                  {/* <td>{client.gender === 1 && 'Masculino' || client.gender === 2 && 'Feminino' || client.gender === 3 && 'Outro'}</td> */}
-                  <td>{client.gender === 1 ? 'Masculino' : (client.gender === 2 ? 'Feminino' : 'Outro')}</td>
-                  <td>{client.created_at}</td>
-                </tr>
-              </tbody>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{client.name}</td>
+                {/* <td>{client.gender === 1 && 'Masculino' || client.gender === 2 && 'Feminino' || client.gender === 3 && 'Outro'}</td> */}
+                <td>{client.gender === 1 ? 'Masculino' : (client.gender === 2 ? 'Feminino' : 'Outro')}</td>
+                <td>{client.created_at}</td>
+                <td><Button variant="outline-warning" href="/client" >Editar</Button></td>
+              </tr>
             ))}
+            </tbody>
             </Table>
         </Container>
       )}

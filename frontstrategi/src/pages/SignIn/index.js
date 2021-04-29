@@ -63,7 +63,7 @@ export default function SignIn() {
           </form>
 
           <div id="formFooter">
-            <a className="underlineHover" href="#">Esqueci minha senha</a>
+            <a className="underlineHover" href="/changepassword">Esqueci minha senha</a>
           </div>
 
         </div>
