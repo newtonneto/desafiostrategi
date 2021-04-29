@@ -4,4 +4,10 @@ const api = axios.create({
   baseURL: 'http://localhost:8000/api/'
 });
 
+export const defaults = {
+  headers: {
+    Authorization: '',
+  },
+};
+
 export default api;

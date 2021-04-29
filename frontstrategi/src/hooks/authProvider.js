@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
 
   const ErrorToast = (text) => {
     toast.error(text, {
-      position: "top-center",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
 
   const SuccessToast = (text) => {
     toast.success(text, {
-      position: "top-center",
+      position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -34,14 +34,18 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    let isMounted = true;
     const refreshToken = localStorage.getItem("refreshToken");
     const accessToken = localStorage.getItem("accessToken");
 
     if (refreshToken && accessToken) {
-      console.log('2');
       api.defaults.headers.Authorization = `Bearer ${accessToken}`;
-      setIsAuthenticated(true);
-    }
+      if (isMounted) {
+        setIsAuthenticated(true);
+      };
+    };
+
+    return () => isMounted = false;
   }, []);
 
   async function SignIn( username, password ) {
