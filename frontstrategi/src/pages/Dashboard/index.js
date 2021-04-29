@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import Loader from 'react-loader-spinner';
+import { useHistory } from 'react-router-dom';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
+import { Centralizer } from '../../template/styles';
+import { UseAuth } from '../../hooks/authProvider';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import house from '../../assets/house.png'
@@ -8,6 +13,8 @@ import house from '../../assets/house.png'
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [properties, setProperties] = useState([]);
+  const { SignOut } = UseAuth();
+  const history = useHistory();
 
   useEffect(() => {
     let isMounted = true;
@@ -17,12 +24,18 @@ export default function Dashboard() {
     };
 
     const getProperties = async (isMounted) => {
-      const { data } = await api.get('properties/');
+      try {
+        const { data } = await api.get('properties/');
 
-      if (isMounted) {
-        setProperties(data);
-        console.log('Properties: ', data);
-        setLoading(false);
+        if (isMounted) {
+          setProperties(data);
+          console.log('Properties: ', data);
+          setLoading(false);
+        };
+      } catch (error) {
+        console.log('Error dashboard: ', error);
+        history.push('');
+        SignOut();
       };
     };
 
@@ -35,7 +48,9 @@ export default function Dashboard() {
     <React.Fragment>
       <Header/>
       {loading ? (
-        <p>Carregando...</p>
+        <Centralizer>
+          <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+        </Centralizer>
       ) : (
         <Container>
           <Row>

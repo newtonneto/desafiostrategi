@@ -1,10 +1,10 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-
-import { Container } from './styles';
-import { UseAuth } from '../../hooks/authProvider';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { FormLogin } from '../../template/styles';
+import { UseAuth } from '../../hooks/authProvider';
 
 const schema = yup.object().shape({
   login: yup
@@ -28,7 +28,7 @@ export default function SignIn() {
   };
 
   return (
-    <Container>
+    <FormLogin>
       <div className="wrapper fadeInDown">
         <div id="formContent">
 
@@ -55,40 +55,6 @@ export default function SignIn() {
               placeholder="senha"
               {...register('password')}
             />
-            {/* <Controller
-              name="login"
-              control={control}
-              defaultValue=""
-              render={({ onChange, value }) => (
-                <React.Fragment>
-                  <input
-                    type="text"
-                    id="login"
-                    className="fadeIn second"
-                    placeholder="usuário"
-                    onChange={e => setLogin(e.target.value)}
-                    value={value}
-                  />
-                </React.Fragment>
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              defaultValue=""
-              render={({ onChange, value }) => (
-                <React.Fragment>
-                  <input
-                    type="text"
-                    id="password"
-                    className="fadeIn third"
-                    placeholder="senha"
-                    onChange={e => setPassword(e.target.value)}
-                    value={value}
-                  />
-                </React.Fragment>
-              )}
-            /> */}
             <input
               type="submit"
               className="fadeIn fourth"
@@ -102,6 +68,6 @@ export default function SignIn() {
 
         </div>
       </div>
-    </Container>
+    </FormLogin>
   );
 };

@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column; 
-  justify-content: center;
-
+export const InputStyles = styled.div`
   a {
     color: #92badd;
     display:inline-block;
@@ -22,20 +16,6 @@ export const Container = styled.div`
     flex-direction: column; 
     justify-content: center;
     width: 100%;
-  }
-
-  #formContent {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    padding: 30px 0px 0px 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    text-align: center;
   }
 
   #formFooter {
@@ -106,6 +86,48 @@ export const Container = styled.div`
   }
 
   input[type=password] {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+  input[type=date] {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+  select {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -246,4 +268,54 @@ export const Container = styled.div`
   #icon {
     width:60%;
   }
+`;
+
+export const FormLogin = styled(InputStyles)`
+  height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+
+  #formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 30px 0px 0px 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+  }
+`;
+
+export const FormRegister = styled(InputStyles)`
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+
+  #formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 100%;
+    position: relative;
+    padding: 30px 0px 0px 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+  }
+`;
+
+export const Centralizer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
 `;

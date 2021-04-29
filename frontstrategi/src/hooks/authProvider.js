@@ -67,10 +67,18 @@ const AuthProvider = ({ children }) => {
     };
   };
 
+  async function SignOut() {
+    setIsAuthenticated(false);
+
+    sessionStorage.removeItem('@App:refreshToken');
+    sessionStorage.removeItem('App:accessToken');
+  }
+
   return (
     <AuthContext.Provider
       value={{
         SignIn,
+        SignOut,
         isAuthenticated
       }}
     >
