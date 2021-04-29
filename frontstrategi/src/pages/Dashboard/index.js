@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
-import { Grid } from './styles';
 import api from '../../services/api';
+import Header from '../../components/Header';
 import house from '../../assets/house.png'
 
 export default function Dashboard() {
@@ -21,7 +21,7 @@ export default function Dashboard() {
 
       if (isMounted) {
         setProperties(data);
-        console.log('Data: ', data);
+        console.log('Properties: ', data);
         setLoading(false);
       };
     };
@@ -32,28 +32,31 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Container>
+    <React.Fragment>
+      <Header/>
       {loading ? (
         <p>Carregando...</p>
       ) : (
-        <Row>
-          {properties.map((property, index) => (
-            <Col key={index}>
-              <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={house} />
-                <Card.Body>
-                  <Card.Title>{property.district}</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                  </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        <Container>
+          <Row>
+            {properties.map((property, index) => (
+              <Col key={index} >
+                <Card style={{ width: '18rem' }}>
+                  <Card.Img variant="top" src={house} />
+                  <Card.Body>
+                    <Card.Title>{property.district}</Card.Title>
+                    <Card.Text>
+                      Some quick example text to build on the card title and make up the bulk of
+                      the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
       )}
-    </Container>
+    </React.Fragment>
   );
 };
