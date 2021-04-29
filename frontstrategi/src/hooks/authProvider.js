@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -7,6 +7,8 @@ import api from '../services/api';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const ErrorToast = (text) => {
     toast.error(text, {
       position: "top-center",
@@ -31,6 +33,16 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (refreshToken && accessToken) {
+      console.log('2');
+      api.defaults.headers.Authorization = `Bearer ${accessToken}`;
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   async function SignIn( username, password ) {
     try {
@@ -38,7 +50,14 @@ const AuthProvider = ({ children }) => {
         username: username,
         password: password
       });
-      SuccessToast('Bem-vindo')
+
+      api.defaults.headers.Authorization = `Bearer ${response.data.access}`;
+      localStorage.setItem("refreshToken", response.data.refresh);
+      localStorage.setItem("accessToken", response.data.access);
+      setIsAuthenticated(true);
+      SuccessToast('Bem-vindo');
+
+      
     } catch (error) {
       ErrorToast('Credenciais inválidas');
     };
@@ -48,6 +67,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         SignIn,
+        isAuthenticated
       }}
     >
       <>
