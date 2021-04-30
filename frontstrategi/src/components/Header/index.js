@@ -7,6 +7,7 @@ export default function Header() {
       <Navbar.Brand href="/">Home</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/clients">Clientes</Nav.Link>
+        <Nav.Link href="/clients">Vendas</Nav.Link>
       </Nav>
     </Navbar>
   );
