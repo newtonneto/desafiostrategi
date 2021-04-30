@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, ListGroup, Modal } from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
 import { useHistory } from 'react-router-dom';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import { Centralizer } from '../../template/styles';
+import { Centralizer, Content } from '../../template/styles';
+import { CardContent } from './styles';
 import { UseAuth } from '../../hooks/authProvider';
 import api from '../../services/api';
 import Header from '../../components/Header';
@@ -13,7 +14,9 @@ import house from '../../assets/house.png'
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [properties, setProperties] = useState([]);
+  const [saleProperty, setSaleProperty] = useState();
   const { SignOut } = UseAuth();
+  const [modalVisible, setModalVisible] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,6 +47,11 @@ export default function Dashboard() {
     return () => isMounted = false;
   }, []);
 
+  const toggle = (property = false) => {
+    property ? setSaleProperty(property) : setSaleProperty();
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <React.Fragment>
       <Header/>
@@ -53,20 +61,43 @@ export default function Dashboard() {
         </Centralizer>
       ) : (
         <Container>
+          <Modal show={modalVisible} onHide={toggle}>
+            <Modal.Header closeButton>
+              <Modal.Title>Vender Propriedade</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{`Valor: ${saleProperty?.value}`}</Modal.Body>
+            <Modal.Body>{`Valor: ${saleProperty?.value}`}</Modal.Body>
+            <Modal.Body>{`Valor: ${saleProperty?.value}`}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={toggle}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={toggle}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
           <Row>
             {properties.map((property, index) => (
               <Col key={index} >
-                <Card style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src={house} />
-                  <Card.Body>
-                    <Card.Title>{property.district}</Card.Title>
-                    <Card.Text>
-                      Some quick example text to build on the card title and make up the bulk of
-                      the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                  </Card.Body>
-                </Card>
+                <CardContent>
+                  <Content>
+                    <div id="formContent">
+                      <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={house} />
+                        <Card.Body>
+                          <Card.Title>R$ {property.value}</Card.Title>
+                          <ListGroup variant="flush">
+                            <ListGroup.Item>{property.district}</ListGroup.Item>
+                            <ListGroup.Item>{`${property.street}, ${property.number}`}</ListGroup.Item>
+                            <ListGroup.Item>{`${property.city}, ${property.state}`}</ListGroup.Item>
+                          </ListGroup>
+                          <Button variant="success" onClick={() => toggle(property)} block >Vender</Button>
+                        </Card.Body>
+                      </Card>
+                    </div>
+                  </Content>
+                </CardContent>
               </Col>
             ))}
           </Row>

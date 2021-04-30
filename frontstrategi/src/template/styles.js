@@ -335,7 +335,7 @@ export const Content = styled.div`
     padding: 16px 10px 10px 10px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    text-align: center;
+    text-align: left;
   }
 `;
 
