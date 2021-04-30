@@ -26,7 +26,7 @@ const schema = yup.object().shape({
       return value ? (value !== '0') : false;
     })  
     .required('Campo obrigatório'),
-})
+});
 
 export default function Client({ ...props }) {
   const [loading, setLoading] = useState(false);
@@ -131,9 +131,6 @@ export default function Client({ ...props }) {
                     <option value="1" >Masculino</option>
                     <option value="2" >Feminino</option>
                     <option value="3" >Outro</option>
-                    {/* <option value="1" selected={client?.gender === 1 ? true : false} >Masculino</option>
-                    <option value="2" selected={client?.gender === 2 ? true : false} >Feminino</option>
-                    <option value="3" selected={client?.gender === 3 ? true : false} >Outro</option> */}
                   </select>
                   {errors.gender && (<RequiredError>{errors.gender.message}</RequiredError>)}
                   <input

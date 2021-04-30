@@ -8,6 +8,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [agent, setAgent] = useState();
 
   const ErrorToast = (text) => {
     toast.error(text, {
@@ -48,6 +49,22 @@ const AuthProvider = ({ children }) => {
     return () => isMounted = false;
   }, []);
 
+  //Extrai dados do token
+  const parseJwt = (token) => {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  };
+
   async function SignIn( username, password ) {
     try {
       const response = await api.post('login/', {
@@ -58,10 +75,10 @@ const AuthProvider = ({ children }) => {
       api.defaults.headers.Authorization = `Bearer ${response.data.access}`;
       localStorage.setItem("refreshToken", response.data.refresh);
       localStorage.setItem("accessToken", response.data.access);
+      const { user_id } = parseJwt(response.data.access);
+      setAgent(user_id);
       setIsAuthenticated(true);
       SuccessToast('Bem-vindo');
-
-      
     } catch (error) {
       ErrorToast('Credenciais inválidas');
     };
@@ -79,7 +96,8 @@ const AuthProvider = ({ children }) => {
       value={{
         SignIn,
         SignOut,
-        isAuthenticated
+        isAuthenticated,
+        agent
       }}
     >
       <>
