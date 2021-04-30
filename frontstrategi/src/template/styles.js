@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+import colors from './colors';
 
 export const InputStyles = styled.div`
   a {
@@ -30,7 +32,7 @@ export const InputStyles = styled.div`
   /* FORM TYPOGRAPHY*/
 
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: ${colors.primary};
     border: none;
     color: white;
     padding: 15px 80px;
@@ -150,7 +152,11 @@ export const InputStyles = styled.div`
 
   input[type=text]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid ${colors.primary};
+  }
+  input[type=password]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid ${colors.primary};
   }
 
   input[type=text]:placeholder {
@@ -318,4 +324,10 @@ export const Centralizer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+`;
+
+export const RequiredError = styled.p`
+  font-size: 16px;
+  color: ${colors.danger};
+  font-weight: 400;
 `;

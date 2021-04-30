@@ -7,26 +7,30 @@ import { useHistory } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import { FormRegister, Centralizer } from '../../template/styles';
+import { FormRegister, Centralizer, RequiredError } from '../../template/styles';
+import colors from '../../template/colors';
 import { UseAuth } from '../../hooks/authProvider';
 import api from '../../services/api';
 import Header from '../../components/Header';
 
 const schema = yup.object().shape({
   name: yup
-      .string()
-      .required('Campo obrigatório'),
+    .string()
+    .required('Campo obrigatório'),
   birth: yup
-      .string()
-      .required('Campo obrigatório'),
+    .string()
+    .required('Campo obrigatório'),
   gender: yup
-      .string()
-      .required('Campo obrigatório'),
+    .string()
+    .test('gender', 'Campo obrigatório', (value) => {
+      return value ? (value !== '0') : false;
+    })  
+    .required('Campo obrigatório'),
 })
 
 export default function Client() {
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     criteriaMode: 'all',
     resolver: yupResolver(schema)
   });
@@ -73,22 +77,41 @@ export default function Client() {
                   <input
                     type="text"
                     id="name"
+                    style={errors.name && {
+                      borderBottomWidth: 2,
+                      borderBottomColor: colors.danger
+                    }}
                     placeholder="Nome completo"
                     disabled={loading ? true : false}
                     {...register('name')}
                   />
+                  {errors.name && (<RequiredError>{errors.name.message}</RequiredError>)}
                   <input
                     type="date"
                     id="birth"
+                    style={errors.birth && {
+                      borderBottomWidth: 2,
+                      borderBottomColor: colors.danger
+                    }}
                     disabled={loading ? true : false}
                     {...register('birth')}
                   />
-                  <select id="gender" defaultValue="0" {...register('gender')} disabled={loading ? true : false}>
+                  {errors.birth && (<RequiredError>{errors.birth.message}</RequiredError>)}
+                  <select
+                    id="gender"
+                    defaultValue="0"
+                    style={errors.gender && {
+                      borderBottomWidth: 2,
+                      borderBottomColor: colors.danger
+                    }}
+                    {...register('gender')}
+                    disabled={loading ? true : false}>
                     <option value="0" disabled >Informe seu gênero...</option>
                     <option value="1" >Masculino</option>
                     <option value="2" >Feminino</option>
                     <option value="3" >Outro</option>
                   </select>
+                  {errors.gender && (<RequiredError>{errors.gender.message}</RequiredError>)}
                   <input
                     type="submit"
                     value="Cadastrar"

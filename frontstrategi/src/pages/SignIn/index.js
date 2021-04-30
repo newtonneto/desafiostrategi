@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { FormLogin } from '../../template/styles';
+import { FormLogin, RequiredError } from '../../template/styles';
+import colors from '../../template/colors';
 import { UseAuth } from '../../hooks/authProvider';
 
 const schema = yup.object().shape({
   login: yup
-      .string()
-      .required('Campo obrigatório'),
+    .string()
+    .required('Campo obrigatório'),
   password: yup
-      .string()
-      .required('Campo obrigatório'),
-})
-
+    .string()
+    .required('Campo obrigatório'),
+});
 
 export default function SignIn() {
   const { SignIn } = UseAuth();
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     criteriaMode: 'all',
     resolver: yupResolver(schema)
   });
@@ -26,6 +26,10 @@ export default function SignIn() {
   const onSubmit = async (data) => {
     SignIn(data.login, data.password);
   };
+
+  useEffect(() => {
+    console.log('errors: ', errors);
+  }, [errors]);
 
   return (
     <FormLogin>
@@ -45,16 +49,26 @@ export default function SignIn() {
               type="text"
               id="login"
               className="fadeIn second"
+              style={errors.login && {
+                borderBottomWidth: 2,
+                borderBottomColor: colors.danger
+              }}
               placeholder="usuário"
               {...register('login')}
             />
+            {errors.login && (<RequiredError>{errors.login.message}</RequiredError>)}
             <input
               type="password"
               id="password"
               className="fadeIn third"
+              style={errors.login && {
+                borderBottomWidth: 2,
+                borderBottomColor: colors.danger
+              }}
               placeholder="senha"
               {...register('password')}
             />
+            {errors.password && (<RequiredError>{errors.password.message}</RequiredError>)}
             <input
               type="submit"
               className="fadeIn fourth"
