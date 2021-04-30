@@ -8,3 +8,4 @@ class Property(models.Model):
   zipcode = models.CharField(max_length=8)
   city = models.CharField(max_length=255)
   state = models.CharField(max_length=2)
+  status = models.BooleanField(default=True)

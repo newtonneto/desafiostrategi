@@ -13,3 +13,9 @@ class Sale(models.Model):
   client = models.ForeignKey(Client, on_delete=models.PROTECT)
   agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
   property = models.ForeignKey(Property, on_delete=models.PROTECT)
+
+  def save(self, *args, **kwargs):
+    self.property.status = False
+    self.property.save()
+    
+    return super(Sale, self).save(*args, **kwargs)
