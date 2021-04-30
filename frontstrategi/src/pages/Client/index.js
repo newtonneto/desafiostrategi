@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     .required('Campo obrigatório'),
 })
 
-export default function Client() {
+export default function Client({ ...props }) {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm({
     criteriaMode: 'all',
@@ -36,17 +36,36 @@ export default function Client() {
   });
   const { SignOut } = UseAuth();
   const history = useHistory();
+  const [client, setClient] = useState();
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (props.location.state?.detail && isMounted) {
+      setClient(props.location.state.detail);
+    };
+
+    return () => isMounted = false;
+  }, []);
 
   const onSubmit = async (data) => {
     setLoading(true);
 
     try {
-      await api.post('clients/', {
-        "name": data.name,
-        "birth": data.birth,
-        "gender": parseInt(data.gender)
-      });
-
+      client ? (
+        await api.patch('clients/', {
+          "name": data.name,
+          "birth": data.birth,
+          "gender": parseInt(data.gender)
+        })
+      ) : (
+        await api.post('clients/', {
+          "name": data.name,
+          "birth": data.birth,
+          "gender": parseInt(data.gender)
+        })
+      );
+      
       setLoading(false);
       history.push('clients');
     } catch (error) {
@@ -81,6 +100,7 @@ export default function Client() {
                       borderBottomWidth: 2,
                       borderBottomColor: colors.danger
                     }}
+                    defaultValue={client ? client.name : ''}
                     placeholder="Nome completo"
                     disabled={loading ? true : false}
                     {...register('name')}
@@ -93,13 +113,14 @@ export default function Client() {
                       borderBottomWidth: 2,
                       borderBottomColor: colors.danger
                     }}
+                    defaultValue={client ? client.birth : ''}
                     disabled={loading ? true : false}
                     {...register('birth')}
                   />
                   {errors.birth && (<RequiredError>{errors.birth.message}</RequiredError>)}
                   <select
                     id="gender"
-                    defaultValue="0"
+                    value={client ? client.gender.toString() : "0"}
                     style={errors.gender && {
                       borderBottomWidth: 2,
                       borderBottomColor: colors.danger
@@ -110,11 +131,14 @@ export default function Client() {
                     <option value="1" >Masculino</option>
                     <option value="2" >Feminino</option>
                     <option value="3" >Outro</option>
+                    {/* <option value="1" selected={client?.gender === 1 ? true : false} >Masculino</option>
+                    <option value="2" selected={client?.gender === 2 ? true : false} >Feminino</option>
+                    <option value="3" selected={client?.gender === 3 ? true : false} >Outro</option> */}
                   </select>
                   {errors.gender && (<RequiredError>{errors.gender.message}</RequiredError>)}
                   <input
                     type="submit"
-                    value="Cadastrar"
+                    value={client ? 'Editar' : 'Cadastrar'}
                   />
                 </form>
               </div>

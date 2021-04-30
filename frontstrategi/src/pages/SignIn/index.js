@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,10 +26,6 @@ export default function SignIn() {
   const onSubmit = async (data) => {
     SignIn(data.login, data.password);
   };
-
-  useEffect(() => {
-    console.log('errors: ', errors);
-  }, [errors]);
 
   return (
     <FormLogin>

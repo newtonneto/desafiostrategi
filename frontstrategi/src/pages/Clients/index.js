@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-import { Centralizer } from '../../template/styles';
+import { Centralizer, Content } from '../../template/styles';
 import { Options } from './styles';
 import { UseAuth } from '../../hooks/authProvider';
 import api from '../../services/api';
@@ -44,6 +44,13 @@ export default function Clients() {
     return () => isMounted = false;
   }, []);
 
+  const editClient = (client) => {
+    history.push({
+      pathname: '/client',
+      state: { detail: client }
+    });
+  };
+
   return (
     <React.Fragment>
       <Header/>
@@ -53,32 +60,36 @@ export default function Clients() {
         </Centralizer>
       ) : (
         <Container>
-          <Options>
-            <Button variant="outline-primary" href="/client" >Cadastrar novo usuário</Button>
-          </Options>
-          <Table striped bordered hover responsive>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nome</th>
-                <th>Gênero</th>
-                <th>Cliente desde</th>
-                <th>Ação</th>
-              </tr>
-            </thead>
-            <tbody>
-            {clients.map((client, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{client.name}</td>
-                {/* <td>{client.gender === 1 && 'Masculino' || client.gender === 2 && 'Feminino' || client.gender === 3 && 'Outro'}</td> */}
-                <td>{client.gender === 1 ? 'Masculino' : (client.gender === 2 ? 'Feminino' : 'Outro')}</td>
-                <td>{client.created_at}</td>
-                <td><Button variant="outline-warning" href="/client" >Editar</Button></td>
-              </tr>
-            ))}
-            </tbody>
-            </Table>
+          <Content>
+            <div id="formContent">
+              <Options>
+                <Button variant="outline-primary" href="/client" >Cadastrar novo usuário</Button>
+              </Options>
+              <Table striped bordered hover responsive>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Gênero</th>
+                    <th>Cliente desde</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {clients.map((client, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{client.name}</td>
+                    {/* <td>{client.gender === 1 && 'Masculino' || client.gender === 2 && 'Feminino' || client.gender === 3 && 'Outro'}</td> */}
+                    <td>{client.gender === 1 ? 'Masculino' : (client.gender === 2 ? 'Feminino' : 'Outro')}</td>
+                    <td>{client.created_at}</td>
+                    <td><Button variant="outline-warning" onClick={() => editClient(client)} >Editar</Button></td>
+                  </tr>
+                ))}
+                </tbody>
+              </Table>
+            </div>
+          </Content>
         </Container>
       )}
     </React.Fragment>

@@ -319,6 +319,26 @@ export const FormRegister = styled(InputStyles)`
   }
 `;
 
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+
+  #formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    width: 100%;
+    position: relative;
+    padding: 16px 10px 10px 10px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+  }
+`;
+
 export const Centralizer = styled.div`
   display: flex;
   align-items: center;
