@@ -120,7 +120,7 @@ export default function Client({ ...props }) {
                   {errors.birth && (<RequiredError>{errors.birth.message}</RequiredError>)}
                   <select
                     id="gender"
-                    value={client ? client.gender.toString() : "0"}
+                    defaultValue={client ? client.gender.toString() : "0"}
                     style={errors.gender && {
                       borderBottomWidth: 2,
                       borderBottomColor: colors.danger
