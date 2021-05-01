@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "e04aa1ac-ba16-47f6-8077-5ebeb31e0591",
+		"name": "Desafio Strategi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Agent",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"username\": \"strategi\",\n        \"email\": \"strategi@gmail.com\",\n        \"password\": \"senha\"\n    },\n    \"birth\": \"1993-08-10\",\n    \"name\": \"Strategi\",\n    \"gender\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}agents/",
+							"host": [
+								"{{api/}}agents"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api/}}agents",
+							"host": [
+								"{{api/}}agents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Newton T B Neto\",\n    \"user\": {\n        \"password\": \"#Noob\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}agents/3/",
+							"host": [
+								"{{api/}}agents"
+							],
+							"path": [
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"email\": \"newton_mgs@hotmail.com\",\n        \"password\": \"#Noob4580\"\n    },\n    \"birth\": \"1993-08-10\",\n    \"name\": \"Newton T B Neto\",\n    \"gender\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}agents/1/",
+							"host": [
+								"{{api/}}agents"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Property",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE5ODMwNTk1LCJqdGkiOiIxM2Q1NjgxODBjYjk0MzQwOTYzYjRmYTJiYjUzNzg1NSIsInVzZXJfaWQiOjJ9.oK36pAwcYRRT3AA0iwkAWxJYlqAOFls44-vNBCFOhJQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": 200000.08,\n    \"street\": \"Street 8\",\n    \"number\": \"1848\",\n    \"district\": \"Neopolis\",\n    \"zipcode\": \"59008000\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}properties/",
+							"host": [
+								"{{api/}}properties"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE5NzQ3NDM0LCJqdGkiOiJjYmZiMTRmMmE1N2Y0ZjMzOTJmYTFhMTg1ZWUyNDVlYyIsInVzZXJfaWQiOjR9.PJqMIARwsc4XDDt6L-f1Pc8PIR37zoc1vkcjcSbazJc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api/}}properties/",
+							"host": [
+								"{{api/}}properties"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": 200100.20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}properties/1/",
+							"host": [
+								"{{api/}}properties"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": 200000.25,\n    \"street\": \"Street Milk Shake\",\n    \"number\": \"1800\",\n    \"district\": \"Capim Macio\",\n    \"zipcode\": \"59080000\",\n    \"city\": \"Natal\",\n    \"state\": \"RN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}properties/1/",
+							"host": [
+								"{{api/}}properties"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Paulla Rachel Gomes de Oliveira\",\n    \"birth\": \"1997-12-05\",\n    \"gender\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}clients/",
+							"host": [
+								"{{api/}}clients"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE5NzM4NTEwLCJqdGkiOiJjYmJmMWZlZmJlNzM0NGZhODE0YmFjNTNhM2VhYzZjOSIsInVzZXJfaWQiOjR9.T3setGJesMzDVwHrb3nm5rBhXGJS3JYFrXHcstLCzok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api/}}clients/",
+							"host": [
+								"{{api/}}clients"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"P R\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}agents/1/",
+							"host": [
+								"{{api/}}agents"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Paulla Rachel G. de Oliveira\",\n    \"birth\": \"1997-12-05\",\n    \"gender\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}clients/1/",
+							"host": [
+								"{{api/}}clients"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sale",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE5Nzg0MTU1LCJqdGkiOiIzOTRiMzc1MTg4NTQ0YjRhYjYyNTE1YWVlMTgzNTAwZiIsInVzZXJfaWQiOjR9.c2NtRhxw9mprOlEdFpHpkFq8lIUQBpZjayWc67a2DDo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment\": 1,\n    \"client\": 1,\n    \"agent\": 1,\n    \"property\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}sales/",
+							"host": [
+								"{{api/}}sales"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE5ODA5NjA3LCJqdGkiOiJiNmJlYjg0ZGMzOGE0ZDhhOTJjMDFlYWQwYjExNjE0ZiIsInVzZXJfaWQiOjR9.OMmH0luKav5awUhyfHChTEePzTpatsCjzYrO87M9XVQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api/}}sales/",
+							"host": [
+								"{{api/}}sales"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}sales/1/",
+							"host": [
+								"{{api/}}sales"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment\": 1,\n    \"client\": 1,\n    \"agent\": 1,\n    \"property\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}sales/1/",
+							"host": [
+								"{{api/}}sales"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"strategi\",\n    \"password\": \"senha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api/}}login/",
+							"host": [
+								"{{api/}}login"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "api/",
+			"value": "http://localhost:8000/api/"
+		}
+	]
+}
