@@ -1,0 +1,1 @@
+release: cd frontstrategi && yarn && yarn start
