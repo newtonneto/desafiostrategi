@@ -1,1 +1,1 @@
-release: cd frontstrategi && npm install && npm start
+release: cd frontstrategi && npm install && npm run start
