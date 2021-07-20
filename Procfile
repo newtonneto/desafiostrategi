@@ -1,1 +1,1 @@
-release: cd frontstrategi && yarn && yarn start
+release: cd frontstrategi && npm install && npm start
